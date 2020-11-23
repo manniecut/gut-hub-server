@@ -4,6 +4,10 @@ const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
+const recipesRouter = require('./recipes/-router')
+const cooklistsRouter = require('./cooklists/-router')
+const usersRouter = require('./users/-router')
+const messagesRouter = require('./messages/-router')
 
 const app = express()
 
@@ -14,18 +18,27 @@ app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
-app.get('/', (req, res) => {
-    res.send('Hello, world!')
+
+/***** ENDPOINT ROUTING *****/
+
+app.use('/api/recipes', recipesRouter)
+app.use('/api/cooklists', cooklistsRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/messages', messagesRouter)
+
+
+
+/***** QUICK DIAGNOSTICS *****/
+
+app.get('/health', (req, res, next) => {
+    res.send('Server is active');
 })
 
-app.use(function errorHandler(error, req, res, next) {
-    let response
-    if (NODE_ENV === 'production') {
-        response = { error: { message: 'server error' } }
-    } else {
-        console.error(error)
-        response = { message: error.message, error }
-    }
-})
+app.use((error, req, res, next) => {
+    console.log("server error:", error.message);
+    res.status(error.status || 500).json({ error: error.message, }); next();
+});
+
+
 
 module.exports = app;
