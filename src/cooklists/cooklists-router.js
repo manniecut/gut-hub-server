@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const xss = require('xss')
-const CooklistsService = require('./Cooklists-service')
+const CooklistsService = require('./cooklists-service')
 
 const cooklistsRouter = express.Router()
 const jsonParser = express.json()
@@ -11,13 +11,14 @@ const sterlizeCooklist = cooklist => ({
     title: xss(cooklist.title),
     creator: cooklist.creator,
     modified: cooklist.modified,
+    quickdesc: xss(cooklist.quickdesc),
     recipeids: cooklist.recipeids
 })
 
 cooklistsRouter
-.route('/')
+    .route('/')
 
 cooklistsRouter
-.route('/:recipeid')
+    .route('/:recipeid')
 
 module.exports = cooklistsRouter
