@@ -21,12 +21,12 @@ const MessagesService = {
             .first();
     },
     deleteMessage(knex, id) {
-        return knex('message')
+        return knex('messages')
             .where({ id })
             .delete();
     },
     updateMessage(knex, id, newMessageFields) {
-        return knex('message')
+        return knex('messages')
             .where({ id })
             .update(newMessageFields);
     }

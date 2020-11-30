@@ -21,12 +21,12 @@ const RecipesService = {
             .first();
     },
     deleteRecipe(knex, id) {
-        return knex('recipe')
+        return knex('recipes')
             .where({ id })
             .delete();
     },
     updateRecipe(knex, id, newRecipeFields) {
-        return knex('recipe')
+        return knex('recipes')
             .where({ id })
             .update(newRecipeFields);
     }

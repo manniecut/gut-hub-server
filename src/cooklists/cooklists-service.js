@@ -21,12 +21,12 @@ const CooklistsService = {
             .first();
     },
     deleteCooklist(knex, id) {
-        return knex('cooklist')
+        return knex('cooklists')
             .where({ id })
             .delete();
     },
     updateCooklist(knex, id, newCooklistFields) {
-        return knex('cooklist')
+        return knex('cooklists')
             .where({ id })
             .update(newCooklistFields);
     }

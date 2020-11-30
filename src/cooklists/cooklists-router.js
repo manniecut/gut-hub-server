@@ -64,7 +64,7 @@ cooklistsRouter
                         error: { message: `Cooklist doesn't exist` }
                     })
                 }
-                res.note = note
+                res.cooklist = cooklist
                 next()
             })
             .catch(next)

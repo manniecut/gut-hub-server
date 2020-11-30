@@ -47,11 +47,11 @@ messagesRouter
     })
 
 messagesRouter
-    .route('/:recipeid')
+    .route('/:messageid')
     .all((req, res, next) => {
         MessagesService.getById(
             req.app.get('db'),
-            req.params.note_id
+            req.params.messageid
         )
             .then(message => {
                 if (!message) {

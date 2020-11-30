@@ -21,12 +21,12 @@ const UsersService = {
             .first();
     },
     deleteUser(knex, id) {
-        return knex('user')
+        return knex('users')
             .where({ id })
             .delete();
     },
     updateUser(knex, id, newUserFields) {
-        return knex('user')
+        return knex('users')
             .where({ id })
             .update(newUserFields);
     }
