@@ -33,6 +33,22 @@ VALUES (
     'guest',
     'guest@guest',
     '1,2,3,5',
+    '2,3,5,6',
+    FALSE
+  ),
+  (
+    'Zack',
+    'zack',
+    'marissa@marissa',
+    '1,2,3,5',
+    '2,3',
+    FALSE
+  ),
+  (
+    'Marissa',
+    'marissa',
+    'marissa@marissa',
+    '1,2,3,5',
     '2,3',
     FALSE
   );
@@ -50,8 +66,8 @@ VALUES (
     2,
     'Slow Cook',
     'Yummy Beef Stew',
-    '{"1":"1 Beef", "2": "2 Stew"}',
-    '{"1": "Prepare Ingredients", "2": "Put in Cooker", "3": "Let it cook slow"}',
+    '{"1":"1 Beef","2":"2 Stew"}',
+    '{"1":"Prepare Ingredients","2":"Put in Cooker","3":"Let it cook slow"}',
     null
   ),
   (
@@ -59,8 +75,8 @@ VALUES (
     1,
     'Salad',
     'Yummy Salad',
-    '{"1": "1 Onion", "2": "2 Tomato", "3": "1 Cucumber", "4": "Olive Oil", "5": "Vinegar"}',
-    '{"1": "Prepare Ingredients", "2": "Put in bowl", "3": "Mix it up!"}',
+    '{"1":"1 Onion","2":"2 Tomato","3":"1 Cucumber","4":"Olive Oil","5":"Vinegar"}',
+    '{"1":"Prepare Ingredients","2":"Put in bowl","3":"Mix it up!"}',
     null
   ),
   (
@@ -68,8 +84,8 @@ VALUES (
     3,
     'Bake',
     'Yummy Pizza',
-    '{"1":"Dough", "2": "Cheese", "3":"Sauce", "4":"Pepperoni"}',
-    '{"1": "Prepare Ingredients", "2": "Put in Oven", "3": "Let it bake!"}',
+    '{"1":"Dough","2":"Cheese","3":"Sauce","4":"Pepperoni"}',
+    '{"1":"Prepare Ingredients","2":"Put in Oven","3":"Let it bake!"}',
     null
   ),
   (
@@ -77,8 +93,8 @@ VALUES (
     2,
     'Blender',
     'Yummy Milkshake',
-    '{"1": "Milk", "2": "Shake"}',
-    '{"1": "Prepare Ingredients", "2": "Put in Blender", "3": "Blend it good!"}',
+    '{"1":"Milk","2":"Shake"}',
+    '{"1": Prepare Ingredients","2":"Put in Blender","3":"Blend it good!"}',
     null
   ),
   (
@@ -107,20 +123,20 @@ INSERT INTO cooklists (title, quickdesc, recipeids, creator)
 VALUES (
     'Camping Recipes',
     'Great Camping Recipes',
-    '1, 3',
+    '1,3',
     3
   ),
   (
     'Weekly Recipes',
     'Great Weekly Recipes',
-    '2, 3',
+    '2,3',
     1
   ),
   ('Desserts', 'Great Dessert Recipes', '4', 2),
   (
     'Holiday Recipes',
     'Great Holiday Recipes',
-    '3, 4',
+    '3,4',
     1
   );
 INSERT INTO messages (sentobject, sender)
