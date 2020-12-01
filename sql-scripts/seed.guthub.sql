@@ -94,7 +94,7 @@ VALUES (
     'Blender',
     'Yummy Milkshake',
     '{"1":"Milk","2":"Shake"}',
-    '{"1": Prepare Ingredients","2":"Put in Blender","3":"Blend it good!"}',
+    '{"1": "Prepare Ingredients","2":"Put in Blender","3":"Blend it good!"}',
     null
   ),
   (
