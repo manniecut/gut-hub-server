@@ -26,7 +26,7 @@ CREATE TABLE recipes (
     title TEXT NOT NULL,
     adddate DATE DEFAULT now(),
     modified TIMESTAMPTZ,
-    recipetype VARCHAR(15),
+    recipetype TEXT,
     quickdesc TEXT,
     ingredients TEXT NOT NULL,
     directions TEXT NOT NULL,

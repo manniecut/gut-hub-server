@@ -6,11 +6,11 @@ const RecipesService = require('./recipes-service')
 const recipesRouter = express.Router()
 const jsonParser = express.json()
 
-const sterlizeRecipe = recipe => ({
+const sterilizeRecipe = recipe => ({
     id: recipe.id,
     title: xss(recipe.title),
     adddate: recipe.adddate,
-    modfied: recipe.modified,
+    modified: recipe.modified,
     recipetype: recipe.recipetype,
     quickdesc: xss(recipe.quickdesc),
     ingredients: recipe.ingredients,
@@ -38,10 +38,9 @@ recipesRouter
                 })
             }
         }
-        newRecipe = {
-            quickdesc: quickdesc,
-            addtlnotes: addtlnotes
-        }
+        newRecipe.quickdesc = quickdesc
+        newRecipe.addtlnotes = addtlnotes
+
         RecipesService.insertRecipe(
             req.app.get('db'),
             newRecipe
