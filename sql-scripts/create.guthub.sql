@@ -17,7 +17,7 @@ CREATE TABLE users (
     email TEXT,
     savedrecipes TEXT,
     savedcooklists TEXT,
-    buddylist TEXT,
+    buddylist TEXT DEFAULT '',
     received TEXT
 );
 
@@ -53,4 +53,3 @@ CREATE TABLE messages (
 
 
 COMMIT;
-

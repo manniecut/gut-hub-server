@@ -7,6 +7,7 @@ INSERT INTO users (
     username,
     pass,
     email,
+    savedrecipes,
     received,
     buddylist,
     isadmin
@@ -15,23 +16,26 @@ VALUES (
     'Mannie',
     'mannie',
     'mannie@mannie',
+    '1,3',
     '1,2,3,5',
     '2,3',
     TRUE
   ),
-  ('Angie', 'angie', 'angie@angie', '6', '1', FALSE),
+  ('Angie', 'angie', 'angie@angie', '1,3', '6', '1', FALSE),
   (
     'Steve',
     'steve',
     'steve@steve',
+    '',
     '4',
-    null,
+    '',
     FALSE
   ),
   (
     'Guest',
     'guest',
     'guest@guest',
+    '3,4',
     '1,2,3,5',
     '2,3,5,6',
     FALSE
@@ -39,7 +43,8 @@ VALUES (
   (
     'Zack',
     'zack',
-    'marissa@marissa',
+    'zack@zack',
+    '',
     '1,2,3,5',
     '2,3',
     FALSE
@@ -48,6 +53,7 @@ VALUES (
     'Marissa',
     'marissa',
     'marissa@marissa',
+    '',
     '1,2,3,5',
     '2,3',
     FALSE
@@ -140,7 +146,7 @@ VALUES (
         Anything to mix in',
     'Send your ingredients straight to the blender. For best results, put in your milk first. That will get the blender mixing quickly. Be sure to let your ice cream soften before scooping. If it\"s too hard, you might end up having to add more milk, which thins the shake.#
         It\"s time to blend away. You\"ll want to keep an eye on the consistency. This recipe should be not too firm and not too soft (runny). Of course, you can always customize it either way. Use less milk for a thicker, spoonable shake and more for a thinner, sippable one.#
-        Pour your milkshake into a chilled glass to serve. It tastes great straight-up or topped with a tower of whipped cream."}',
+        Pour your milkshake into a chilled glass to serve. It tastes great straight-up or topped with a tower of whipped cream.',
     'Feeling fancy? Layer on toppings like chocolate syrup, sugary cereal or rainbow sprinkles.'
   ),
   (

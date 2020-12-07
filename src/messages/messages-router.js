@@ -71,7 +71,7 @@ messagesRouter
     .delete((req, res, next) => {
         MessagesService.deleteMessage(
             req.app.get('db'),
-            req.app.params.recipeid
+            req.app.params.messageid
         )
             .then(numRowsAffected => {
                 res.status(204).end()
