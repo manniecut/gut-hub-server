@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const supertest = require('supertest')
+const supertest = require('supertest');
 const app = require('../src/app')
 
 describe('Server is running', () => {
@@ -7,6 +7,5 @@ describe('Server is running', () => {
         return supertest(app)
             .get('/health')
             .expect(200, 'Server is active')
-            
     })
 })
