@@ -1,3 +1,14 @@
+cleanTables = (db) => {
+    return db.transaction(transaction =>
+        transaction.raw(
+            `TRUNCATE
+                messages,
+                recipes
+                `
+        )
+    )
+}
+
 function makeUsersArray() {
     return [
         {
@@ -169,6 +180,34 @@ function makeMessagesArray() {
     ];
 }
 
+
+seedTables = (db, users, recipes, messages) => {
+
+    return db.transaction(async trx => {
+
+        if (users.length > 0) {
+            await trx.into('users').insert(users);
+        };
+
+        if (recipes.length > 0) {
+            await trx.into('recipes').insert(recipes);
+        };
+
+        if (messages.length > 0) {
+            await trx.into('messages').insert(messages);
+        };
+    });
+}
+
+makeFixtures = () => {
+    const testUsers = makeUsersArray();
+    const testRecipes = makeRecipesArray();
+    const testMessages = makeMessagesArray();
+    return { testUsers, testRecipes, testMessages };
+}
+
+
+
 function randomUser() {
     const index = Math.floor(Math.random() * makeUsersArray().length);
     return makeUsersArray()[index];
@@ -185,9 +224,14 @@ function randomMessage() {
 }
 
 module.exports = {
+    makeFixtures,
+    cleanTables,
+    seedTables,
+
     makeUsersArray,
     makeRecipesArray,
     makeMessagesArray,
+
     randomUser,
     randomRecipe,
     randomMessage

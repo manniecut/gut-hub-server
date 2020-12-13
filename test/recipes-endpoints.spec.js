@@ -2,10 +2,12 @@ const { expect } = require('chai')
 const knex = require('knex')
 const supertest = require('supertest')
 const app = require('../src/app')
-const { makeRecipesArray } = require('./app.fixtures')
+const fixtures = require('./app.fixtures')
 
-describe('Recipes Endpoints', function() {
+describe('Recipes Endpoints', function () {
     let db
+
+    const { testUsers, testRecipes, testMessages } = fixtures.makeFixtures();
 
     before('make knex instance', () => {
         db = knex({
@@ -19,19 +21,30 @@ describe('Recipes Endpoints', function() {
 
     before('clean the table', () => db('recipes').truncate())
 
-    context('Given there are recipes in the database', () => {
-        const testRecipes = makeRecipesArray();
+    afterEach(`truncate database and restart identities`, () => fixtures.cleanTables(db))
 
-        beforeEach('insert recipes', () => {
-            return db
-                .into('recipes')
-                .insert(testRecipes)
-        })
+
+    context('Given there are recipes in the database', () => {
+        beforeEach('seed db', () => {
+            fixtures.seedTables(
+                db,
+                testUsers,
+                testRecipes,
+                testMessages
+            )
+        });
 
         it('Get /api/recipes responds with 200 and all of the recipes', () => {
             return supertest(app)
-            .get('/api/recipes')
-            .expect(200)
+                .get('/api/recipes')
+                .expect(200)
+        })
+
+        it('Get /api/recipes/:recipeid responds with 200 and a specific recipe', () => {
+            return supertest(app)
+                .get('/api/recipes/1')
+                .expect(200)
+                .expect('Content-Type', /json/);
         })
     })
 
