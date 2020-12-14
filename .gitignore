@@ -1,2 +1,4 @@
 node_modules
 .env
+src/cooklists/cooklists-router.js
+src/cooklists/cooklists-service.js
