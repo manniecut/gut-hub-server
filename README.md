@@ -24,10 +24,10 @@ Complete the following steps to start a new project (NEW-PROJECT-NAME):
 
 ## Technologies
 
-**JS ES6**
-**Node**
-**Express**
-**PostgreSQL**
+- **JS ES6**
+- **Node**
+- **Express**
+- **PostgreSQL**
 
 ## Endpoints
 
