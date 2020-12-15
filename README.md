@@ -4,6 +4,10 @@
 
 This is the API utilized by the GutHub app. It is built around a PostgreSQL database.
 
+## Client
+- [GutHub](https://gut-hub.vercel.app/)
+- [Client Repository](https://github.com/manniecut/gut-hub)
+
 ## Table of contents
 
 *  [Set up](#set-up)
