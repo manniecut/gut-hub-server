@@ -24,6 +24,10 @@ const secureResponse = (users) => {
     secureUsers = []
     users = users.forEach(user => {
         delete user.pass
+        delete user.joindate
+        delete user.isadmin
+        delete user.email
+        delete user.savedcooklists
         secureUsers.push(user)
     })
     return secureUsers
