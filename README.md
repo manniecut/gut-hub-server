@@ -10,21 +10,10 @@ This is the API utilized by the GutHub app. It is built around a PostgreSQL data
 
 ## Table of contents
 
-*  [Set up](#set-up)
 *  [Technologies](#technologies)
 *  [Endpoints](#endpoints)
 *  [Scripts](#scripts)
 *  [Deploying](#deploying)
-
-## Set up
-
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
-
-1. Clone this repository to your local machine
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
 
 ## Technologies
 
@@ -36,22 +25,35 @@ Complete the following steps to start a new project (NEW-PROJECT-NAME):
 ## Endpoints
 
 ### Users:
+The users endpoint is used for creating, reading, updating, and deleting users.
  - GET `/api/users`
+ This endpoint returns a list of all of the users.
  - POST `/api/users`
+ This endpoint is used to create a new user.
  - GET `/api/users/:id`
+ This endpoint will return the information of a specific user.
  - PATCH `/api/users/:id`
+ This endpoint is used to update a specfic user's database entry.
  - DELETE `/api/users/:id`
+ This endpoint is used to remove a user.
 ### Recipes:
  - GET `/api/recipes`
+ This endpoint will return all of the recipes in the database.
  - POST `/api/recipes`
+ This endpoint is used to add a new recipe to the database.
  - GET `/api/recipes/:id`
- - PATCH `/api/recipes/:id`
+ This endpoint will return a specific recipe.
  - DELETE `/api/recipes/:id`
+ This endpoint will delete a specific recipe.
 ### Messages:
  - GET `/api/messages`
+ This endpoint returns all of the messages in the database.
  - POST `/api/messages`
+ This endpoint will create a new message.
  - GET `/api/messages/:id`
+ This endpoint will return a specific message.
  - DELETE `/api/messages/:id`
+ This endpoint will delete a specific message.
 
 ## Scripts
 
