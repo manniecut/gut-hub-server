@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config')
 const recipesRouter = require('./recipes/recipes-router')
 const usersRouter = require('./users/users-router')
 const messagesRouter = require('./messages/messages-router')
+const loginRouter = require('./login/login-router')
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(cors())
 app.use('/api/recipes', recipesRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/messages', messagesRouter)
+app.use('/api/login', loginRouter)
 
 
 

@@ -19,12 +19,22 @@ const sterlizeUser = user => ({
     received: user.received
 })
 
+// This function removes the password from the users response.
+const secureResponse = (users) => {
+    secureUsers = []
+    users = users.forEach(user => {
+        delete user.pass
+        secureUsers.push(user)
+    })
+    return secureUsers
+}
+
 usersRouter
     .route('/')
     .get((req, res, next) => {
         UsersService.getAllUsers(req.app.get('db'))
             .then(users => {
-                res.json(users)
+                res.json(secureResponse(users))
             })
             .catch(next)
     })
@@ -50,7 +60,6 @@ usersRouter
                     .json(sterlizeUser(user))
             })
             .catch(next)
-
     })
 
 usersRouter
