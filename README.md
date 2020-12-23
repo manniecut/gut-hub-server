@@ -2,7 +2,7 @@
 
 ## Description
 
-This is the API utilized by the GutHub app. GutHub is a simple recipe sharing app. This API retrieves the necessary data from a databse and relays it to the client.
+This is the API utilized by the GutHub app. GutHub is a simple recipe sharing app. This API retrieves the necessary data from a database and relays it to the client.
 
 ## Client
 - [GutHub](https://gut-hub.vercel.app/)
@@ -24,18 +24,18 @@ This is the API utilized by the GutHub app. GutHub is a simple recipe sharing ap
 
 ## Endpoints
 
-GutHub is a recipe app, it uses this API to access a database of recipes, users, and messages. Each endpoint deals with its own table within the database, and all of the information in the tables works together to create the user's experience. In this section you can find information on what each endpoint does.
+GutHub is a recipe app, it uses this API to access a database of recipes, users, and messages. Each endpoint deals with its own table within the database, and the information in the tables works together to create the user's experience. In this section you can find information on what each endpoint does.
 
 ### Users:
 The users endpoint is used for creating, reading, updating, and deleting users. In GutHub, you cannot do anything without a user account, and the rest of the database is reliant on the users table.
  - GET `/api/users`\
- This endpoint returns a list of all of the users. GutHub is a social app and access to the users table is often needed. NOTE: This does not return user passwords, of course.
+ This endpoint returns a list of all users. GutHub is a social app and access to the users table is often needed. NOTE: This does not return user passwords, of course.
  - POST `/api/users`\
  This endpoint is used to create a new user. The account is a vital part of GutHub, and this endpoint is required to create it. 
  - GET `/api/users/:id`\
  This endpoint will return the information of a specific user. The user table contains vital information like the buddylist and saved recipes, which need to be referenced often.
  - PATCH `/api/users/:id`\
- This endpoint is used to update a specfic user's database entry. This endpoint is useful for updating passwords, emails, and even adding a user's received messages to their account.
+ This endpoint is used to update a specific user's database entry. This endpoint is useful for updating passwords, emails, and even adding a user's received messages to their account.
  - DELETE `/api/users/:id`\
  This endpoint is used to remove a user. Deleting a user will not delete their recipes.
 ### Recipes:
