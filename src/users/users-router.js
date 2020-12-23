@@ -96,8 +96,6 @@ usersRouter
     .patch(jsonParser, (req, res, next) => {
         const { username, pass, email, savedrecipes, savedcooklists, buddylist, received } = req.body
         const userToUpdate = { username, pass, email, savedrecipes, savedcooklists, buddylist, received }
-        console.log(req.body)
-
         if (!userToUpdate)
             return res.status(400).json({
                 error: {
