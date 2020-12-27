@@ -6,6 +6,7 @@ const RecipesService = require('./recipes-service')
 const recipesRouter = express.Router()
 const jsonParser = express.json()
 
+// sterilizing any inputs that could cause trouble
 const sterilizeRecipe = recipe => ({
     id: recipe.id,
     title: xss(recipe.title),
@@ -21,26 +22,27 @@ const sterilizeRecipe = recipe => ({
 
 recipesRouter
     .route('/')
-    .get((req, res, next) => {
+    .get((req, res, next) => { // retrieve all recipes from dB
         RecipesService.getAllRecipes(req.app.get('db'))
             .then(recipes => {
                 res.json(recipes)
             })
             .catch(next)
     })
-    .post(jsonParser, (req, res, next) => {
+    .post(jsonParser, (req, res, next) => { // add a new recipe to DB
         const { title, recipetype, quickdesc, ingredients, directions, addtlnotes, creator } = req.body
         const newRecipe = { title, recipetype, ingredients, directions, creator }
-        for (const [key, value] of Object.entries(newRecipe)) {
+        for (const [key, value] of Object.entries(newRecipe)) { // return error if missing required field
             if (value == null) {
                 return res.status(400).json({
                     error: { message: `Needs ${key} in request body` }
                 })
             }
         }
+        // add non-required fields after check
         newRecipe.quickdesc = quickdesc
         newRecipe.addtlnotes = addtlnotes
-
+        // insert recipe to DB
         RecipesService.insertRecipe(
             req.app.get('db'),
             newRecipe
@@ -56,7 +58,7 @@ recipesRouter
 
 recipesRouter
     .route('/:recipeid')
-    .all((req, res, next) => {
+    .all((req, res, next) => { // get specific recipe by ID
         RecipesService.getById(
             req.app.get('db'),
             req.params.recipeid
@@ -75,7 +77,7 @@ recipesRouter
     .get((req, res, next) => {
         res.json(res.recipe)
     })
-    .delete((req, res, next) => {
+    .delete((req, res, next) => { // delete specific recipe by ID
         RecipesService.deleteRecipe(
             req.app.get('db'),
             req.params.recipeid
@@ -85,16 +87,17 @@ recipesRouter
             })
             .catch(next)
     })
-    .patch(jsonParser, (req, res, next) => {
+    .patch(jsonParser, (req, res, next) => { // update specific recipe by ID
         const { title, recipetype, quickdesc, ingredients, directions, addtlnotes } = req.body
         const recipeToUpdate = { title, recipetype, quickdesc, ingredients, directions, addtlnotes }
+        // return error if recipe not properly submitted
         if (!recipeToUpdate)
             return res.status(400).json({
                 error: {
                     message: `Nothing to update`
                 }
             })
-        RecipesService.updateRecipe(
+        RecipesService.updateRecipe( // update recipe in DB
             req.app.get('db'),
             req.params.recipeid,
             recipeToUpdate

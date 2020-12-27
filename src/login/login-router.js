@@ -1,13 +1,14 @@
-const { Router, json } = require('express');
-const loginRouter = Router();
-const jsonBodyParser = json();
+const express = require('express');
 const LoginService = require('./login-service');
 
+const loginRouter = express.Router();
+const jsonParser = express.json();
+
+
 loginRouter
-  .post('/', jsonBodyParser, (req, res, next) => {
+  .post('/', jsonParser, (req, res, next) => {
 
     const loginUser = req.body;
-    //const loginUser = { username, password };
 
     // Verifies both username and password exist
     for (const [key, value] of Object.entries(loginUser)) {

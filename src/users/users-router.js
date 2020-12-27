@@ -1,4 +1,3 @@
-const path = require('path')
 const express = require('express')
 const xss = require('xss')
 const UsersService = require('./users-service')
@@ -9,7 +8,7 @@ const jsonParser = express.json()
 const sterlizeUser = user => ({
     id: user.id,
     username: xss(user.username),
-    pass: user.pass,
+    pass: xss(user.pass),
     joindate: user.joindate,
     isadmin: user.isadmin,
     email: user.email,
@@ -19,7 +18,7 @@ const sterlizeUser = user => ({
     received: user.received
 })
 
-// This function removes the password from the users response.
+// removes any sensitive information from the response
 const secureResponse = (users) => {
     secureUsers = []
     users = users.forEach(user => {
@@ -35,17 +34,17 @@ const secureResponse = (users) => {
 
 usersRouter
     .route('/')
-    .get((req, res, next) => {
+    .get((req, res, next) => { // retrieve all users from DB
         UsersService.getAllUsers(req.app.get('db'))
             .then(users => {
                 res.json(secureResponse(users))
             })
             .catch(next)
     })
-    .post(jsonParser, (req, res, next) => {
+    .post(jsonParser, (req, res, next) => { // add a new user to DB
         const { username, pass, email } = req.body
         const newUser = { username, pass }
-        for (const [key, value] of Object.entries(newUser)) {
+        for (const [key, value] of Object.entries(newUser)) { // check for required fields
             if (value == null) {
                 return res.status(400).json({
                     error: { message: `Missing '${key}' in request body` }
@@ -53,7 +52,7 @@ usersRouter
             }
         }
         newUser.email = email
-        UsersService.insertUser(
+        UsersService.insertUser( // insert new user into DB
             req.app.get('db'),
             newUser
         )
@@ -68,12 +67,12 @@ usersRouter
 
 usersRouter
     .route('/:userid')
-    .all((req, res, next) => {
+    .all((req, res, next) => { // retrieve specific user by ID
         UsersService.getById(
             req.app.get('db'),
             req.params.userid
         )
-            .then(user => {
+            .then(user => { // send error if user doesn't exist
                 if (!user) {
                     return res.status(404).json({
                         error: { message: `User doesn't exist` }
@@ -87,7 +86,7 @@ usersRouter
     .get((req, res, next) => {
         res.json(sterlizeUser(res.user))
     })
-    .delete((req, res, next) => {
+    .delete((req, res, next) => { // delete specific user from DB
         UsersService.deleteUser(
             req.app.get('db'),
             req.params.userid
@@ -97,16 +96,16 @@ usersRouter
             })
             .catch(next)
     })
-    .patch(jsonParser, (req, res, next) => {
+    .patch(jsonParser, (req, res, next) => { // update specific user in DB
         const { username, pass, email, savedrecipes, savedcooklists, buddylist, received } = req.body
         const userToUpdate = { username, pass, email, savedrecipes, savedcooklists, buddylist, received }
-        if (!userToUpdate)
+        if (!userToUpdate) // return error if missing
             return res.status(400).json({
                 error: {
                     message: `Nothing to update`
                 }
             })
-        UsersService.updateUser(
+        UsersService.updateUser( // patch user in DB
             req.app.get('db'),
             req.params.userid,
             userToUpdate
